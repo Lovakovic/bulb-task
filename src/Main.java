@@ -16,9 +16,34 @@ public class Main {
                 "quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo\n" +
                 "voluptas nulla pariatur?";
 
-//        System.out.println(TextUtil.randomizeInnerChars(text));
-//        System.out.println(TextUtil.reverseCharsInWord(text));
-//        System.out.println(TextUtil.reverseWordsInSentence(text));
-        System.out.println(TextUtil.reverseSentencesInText(text));
+        // Prvi zadatak
+        new Thread(() -> {
+            System.out.println("Prvi zadatak: " + TextUtil.randomizeInnerChars(text));
+        }).start();
+
+        // Drugi zadatak
+        new Thread(() -> {
+            System.out.println("Drugi zadatak: " + TextUtil.randomizeInnerChars(text));
+        }).start();
+
+        // Treci zadatak
+        new Thread(() -> {
+            System.out.println("Treci zadatak: " + TextUtil.reverseWordsInSentence(text));
+        }).start();
+
+        // Cetvrti zadatak
+        new Thread(() -> {
+            System.out.println("Cetvrti zadatak: " + TextUtil.reverseSentencesInText(text));
+        }).start();
+
+        // Peti zadatak a)
+        new Thread(() -> {
+            System.out.println("Peti zadatak, a), broj samoglasnika u tekstu: " + TextUtil.countVowelsInText(text));
+        }).start();
+
+        // Peti zadatak b)
+        new Thread(() -> {
+            System.out.println("Peti zadatak, b), broj samoglasnika po rečenici: " + TextUtil.countVowelsInEachSentence(text));
+        }).start();
     }
 }
