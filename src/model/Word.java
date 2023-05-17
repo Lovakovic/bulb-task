@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Word {
-    private String string;
+    private String word;
     private char punctuationAfter;
 
     public Word(String word) {
@@ -13,15 +13,14 @@ public class Word {
                 .map(String::trim)
                 .toList();
 
-        this.string = tokens.get(0);
+        this.word = tokens.get(0);
         if (tokens.size() > 1) {
             this.punctuationAfter = tokens.get(1).charAt(0);
         }
     }
 
-
     public Word(List<Character> word, char punctuationAfter) {
-        this.string = word.stream()
+        this.word = word.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining());
 
@@ -30,13 +29,17 @@ public class Word {
         }
     }
 
+    public void capitalizeFirstLetter() {
+        this.word = word.substring(0, 1).toUpperCase() + word.substring(1);
+    }
+
     @Override
     public String toString() {
         if (punctuationAfter != 0) {
-            return string + punctuationAfter;
+            return word + punctuationAfter;
         }
 
-        return string;
+        return word;
     }
 
     /***
@@ -44,15 +47,15 @@ public class Word {
      * @return A list of characters in the word in original order, without punctuation.
      */
     public List<Character> getCharacters() {
-        return this.string.chars().mapToObj(c -> (char)c).toList();
+        return this.word.chars().mapToObj(c -> (char)c).toList();
     }
 
-    public String getString() {
-        return string;
+    public String getWord() {
+        return word;
     }
 
-    public void setString(String string) {
-        this.string = string;
+    public void setWord(String word) {
+        this.word = word;
     }
 
     public char getPunctuationAfter() {

@@ -22,11 +22,16 @@ public class Sentence {
         }
     }
 
-    public Sentence(List<Word> words, Character endingCharacter) {
+    public Sentence(List<Word> words, char endingCharacter) {
         this.words = words;
-        if(endingCharacter != null) {
+        if(endingCharacter != 0) {
             this.endingCharacter = endingCharacter;
         }
+    }
+
+    public void capitalizeFirstLetter() {
+        Word firstWord = words.get(0);
+        firstWord.capitalizeFirstLetter();
     }
 
     @Override
