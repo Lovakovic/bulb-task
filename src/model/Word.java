@@ -6,11 +6,12 @@ import java.util.stream.Collectors;
 
 public class Word {
     private String string;
-    private Character punctuationAfter;
+    private char punctuationAfter;
 
     public Word(String word) {
-        List<String> tokens = Arrays.stream(word.split("[\\p{Punct}\\s]+")).toList();
-        this.punctuationAfter = null;
+        List<String> tokens = Arrays.stream(word.split("(?<=\\p{L})(?=\\p{Punct})|(?<=\\p{Punct})(?=\\p{L})"))
+                .map(String::trim)
+                .toList();
 
         this.string = tokens.get(0);
         if (tokens.size() > 1) {
@@ -18,19 +19,20 @@ public class Word {
         }
     }
 
-    public Word(List<Character> word, Character punctuationAfter) {
+
+    public Word(List<Character> word, char punctuationAfter) {
         this.string = word.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining());
 
-        if(punctuationAfter != null) {
+        if(punctuationAfter != 0) {
             this.punctuationAfter = punctuationAfter;
         }
     }
 
     @Override
     public String toString() {
-        if(punctuationAfter != null) {
+        if (punctuationAfter != 0) {
             return string + punctuationAfter;
         }
 
@@ -53,8 +55,8 @@ public class Word {
         this.string = string;
     }
 
-    public Character getPunctuationAfter() {
-        return punctuationAfter != null ? punctuationAfter : ' ';
+    public char getPunctuationAfter() {
+        return punctuationAfter != 0 ? punctuationAfter : 0;
     }
 
     public void setPunctuationAfter(Character punctuationAfter) {

@@ -2,10 +2,11 @@ package model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Sentence {
     private List<Word> words;
-    private Character endingCharacter;
+    private char endingCharacter;
 
     public Sentence(String sentence) {
         char endingCharacter = sentence.charAt(sentence.length()-1);
@@ -23,14 +24,15 @@ public class Sentence {
 
     public Sentence(List<Word> words, Character endingCharacter) {
         this.words = words;
-        if(endingCharacter != ' ') {
+        if(endingCharacter != null) {
             this.endingCharacter = endingCharacter;
         }
     }
 
     @Override
     public String toString() {
-        return this.words.toString() + this.endingCharacter;
+        String sentence = this.words.stream().map(Word::toString).collect(Collectors.joining(" "));
+        return sentence.trim() + (this.endingCharacter != 0 ? this.endingCharacter : "") + " ";
     }
 
     public List<Word> getWords() {
@@ -41,11 +43,11 @@ public class Sentence {
         this.words = words;
     }
 
-    public Character getEndingCharacter() {
+    public char getEndingCharacter() {
         return endingCharacter;
     }
 
-    public void setEndingCharacter(Character endingCharacter) {
+    public void setEndingCharacter(char endingCharacter) {
         this.endingCharacter = endingCharacter;
     }
 }

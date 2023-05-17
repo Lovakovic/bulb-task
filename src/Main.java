@@ -1,9 +1,8 @@
-import util.NewUtil;
 import util.TextUtil;
 
 public class Main {
     public static void main(String[] args) {
-        String text = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem\n" +
+        String text = "Sed, ut perspiciatis unde omnis iste natus error sit voluptatem\n" +
                 "accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab\n" +
                 "illo inventore veritatis et quasi architecto beatae vitae dicta sunt\n" +
                 "explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut\n" +
@@ -17,6 +16,6 @@ public class Main {
                 "quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo\n" +
                 "voluptas nulla pariatur?";
 
-        System.out.println(NewUtil.randomizeInnerChars(text));
+        System.out.println(TextUtil.randomizeInnerChars(text));
     }
 }

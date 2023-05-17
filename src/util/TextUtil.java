@@ -9,10 +9,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class NewUtil {
+public class TextUtil {
     public static String randomizeInnerChars(String text) {
         List<Sentence> sentences = parseTextToSentences(text);
-        List<Sentence> modifedSentences = new ArrayList<>();
+        List<Sentence> modifiedSentences = new ArrayList<>();
 
         // Sentence parsing
         for(Sentence sentence : sentences) {
@@ -23,7 +23,7 @@ public class NewUtil {
             for(Word word : words) {
                 List<Character> wordCharacters = new ArrayList<>(word.getCharacters());
 
-                Character[] firstLastChar = {
+                char[] firstLastChar = {
                         wordCharacters.remove(0),
                         wordCharacters.remove(wordCharacters.size()-1)
                 };
@@ -35,11 +35,10 @@ public class NewUtil {
                 newSentenceWords.add(new Word(wordCharacters, word.getPunctuationAfter()));
             }
 
-            modifedSentences.add(new Sentence(newSentenceWords, sentence.getEndingCharacter()));
+            modifiedSentences.add(new Sentence(newSentenceWords, sentence.getEndingCharacter()));
         }
 
-        String newSentences = buildStringFromSentences(modifedSentences);
-        return newSentences;
+        return buildStringFromSentences(modifiedSentences).trim();
     }
 
     private static List<Sentence> parseTextToSentences(String text) {
