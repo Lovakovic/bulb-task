@@ -4,10 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a word.
+ */
 public class Word {
     private String word;
     private char punctuationAfter;
 
+    /**
+     * Constructs a word from a string.
+     *
+     * @param word The string to construct the word from.
+     */
     public Word(String word) {
         List<String> tokens = Arrays.stream(word.split("(?<=\\p{L})(?=\\p{Punct})|(?<=\\p{Punct})(?=\\p{L})"))
                 .map(String::trim)
@@ -19,6 +27,12 @@ public class Word {
         }
     }
 
+    /**
+     * Constructs a word from a list of characters and a punctuation character.
+     *
+     * @param word The list of characters.
+     * @param punctuationAfter The punctuation character.
+     */
     public Word(List<Character> word, char punctuationAfter) {
         this.word = word.stream()
                 .map(String::valueOf)
@@ -29,10 +43,18 @@ public class Word {
         }
     }
 
+    /**
+     * Capitalizes the first letter of the word.
+     */
     public void capitalizeFirstLetter() {
         this.word = word.substring(0, 1).toUpperCase() + word.substring(1);
     }
 
+    /**
+     * Converts the word to a string.
+     *
+     * @return The string representation of the word.
+     */
     @Override
     public String toString() {
         if (punctuationAfter != 0) {
@@ -42,9 +64,10 @@ public class Word {
         return word;
     }
 
-    /***
-     * Parses word into characters without punctuation.
-     * @return A list of characters in the word in original order, without punctuation.
+    /**
+     * Parses the word into characters without punctuation.
+     *
+     * @return A list of characters in the word in the original order, without punctuation.
      */
     public List<Character> getCharacters() {
         return this.word.chars().mapToObj(c -> (char)c).toList();

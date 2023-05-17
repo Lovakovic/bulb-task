@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a sentence.
+ */
 public class Sentence {
     private List<Word> words;
     private char endingCharacter;
