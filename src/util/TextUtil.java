@@ -41,6 +41,28 @@ public class TextUtil {
         return buildStringFromSentences(modifiedSentences).trim();
     }
 
+    public static String reverseWords(String text) {
+        List<Sentence> sentences = parseTextToSentences(text);
+        List<Sentence> modifiedSentences = new ArrayList<>();
+
+        for(Sentence sentence : sentences) {
+            List<Word> words = sentence.getWords();
+
+            List<Word> reversedWords = new ArrayList<>();
+            for(Word word : words) {
+                StringBuilder reversedWord = new StringBuilder(word.getWord().toLowerCase());
+
+                reversedWords.add(new Word(reversedWord.reverse().toString() + word.getPunctuationAfter()));
+            }
+
+            Sentence newSentence = new Sentence(reversedWords, sentence.getEndingCharacter());
+            newSentence.capitalizeFirstLetter();
+            modifiedSentences.add(newSentence);
+        }
+
+        return buildStringFromSentences(modifiedSentences);
+    }
+
     private static List<Sentence> parseTextToSentences(String text) {
         return Arrays.stream(text.replace("\n", " ").split("(?<=[.!?])\\s+"))
                 .map(Sentence::new)
