@@ -10,6 +10,11 @@ public class Sentence {
     private List<Word> words;
     private char endingCharacter;
 
+    /**
+     * Constructs a sentence from a string.
+     *
+     * @param sentence The string to construct the sentence from.
+     */
     public Sentence(String sentence) {
         char endingCharacter = sentence.charAt(sentence.length()-1);
         if(endingCharacter == '.' || endingCharacter == '!' || endingCharacter == '?') {
@@ -24,6 +29,12 @@ public class Sentence {
         }
     }
 
+    /**
+     * Constructs a sentence from a list of words and an ending character.
+     *
+     * @param words The list of words.
+     * @param endingCharacter The ending character.
+     */
     public Sentence(List<Word> words, char endingCharacter) {
         this.words = words;
         if(endingCharacter != 0) {
@@ -31,6 +42,11 @@ public class Sentence {
         }
     }
 
+    /**
+     * Counts the number of each vowel character in the sentence.
+     *
+     * @return A map with the vowel characters as keys and their counts as values.
+     */
     public Map<Character, Long> countVowels() {
         char[] vowels = {'a', 'e', 'i', 'o', 'u'};
         String sentence = this.toString();
@@ -44,11 +60,19 @@ public class Sentence {
         return vowelCount;
     }
 
+    /**
+     * Capitalizes the first letter of the first word in the sentence.
+     */
     public void capitalizeFirstLetter() {
         Word firstWord = words.get(0);
         firstWord.capitalizeFirstLetter();
     }
 
+    /**
+     * Converts the sentence to a string.
+     *
+     * @return The string representation of the sentence.
+     */
     @Override
     public String toString() {
         String sentence = this.words.stream().map(Word::toString).collect(Collectors.joining(" "));
