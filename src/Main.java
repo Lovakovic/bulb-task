@@ -23,7 +23,7 @@ public class Main {
 
         // Drugi zadatak
         new Thread(() -> {
-            System.out.println("Drugi zadatak: " + TextUtil.randomizeInnerChars(text));
+            System.out.println("Drugi zadatak: " + TextUtil.reverseCharsInWord(text));
         }).start();
 
         // Treci zadatak
