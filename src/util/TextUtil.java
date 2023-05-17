@@ -1,12 +1,10 @@
 package util;
 
+import com.sun.jdi.event.StepEvent;
 import model.Sentence;
 import model.Word;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TextUtil {
@@ -83,6 +81,36 @@ public class TextUtil {
         }
 
         return buildStringFromSentences(modifiedSentences);
+    }
+
+    public static Map<Character, Long> countVowelsInText(String text) {
+        List<Sentence> sentences = parseTextToSentences(text);
+
+        Map<Character, Long> textVowelCount = new HashMap<>();
+        for(Sentence sentence : sentences) {
+            Map<Character, Long> sentenceVowelCount = new HashMap<>(sentence.countVowels());
+
+            for(Character vowel : sentenceVowelCount.keySet()) {
+                Long previousCount = textVowelCount.get(vowel);
+
+                if(previousCount == null) {
+                    textVowelCount.put(vowel, sentenceVowelCount.get(vowel));
+                } else {
+                    textVowelCount.put(vowel, previousCount + sentenceVowelCount.get(vowel));
+                }
+            }
+        }
+
+        return textVowelCount;
+    }
+
+    public static void countVowelsInEachSentence(String text) {
+        List<Sentence> sentences = parseTextToSentences(text);
+        int count = 0;
+
+        for(Sentence sentence : sentences) {
+            System.out.println("Broj samoglasnika u "  + ++count + ". rečenici: " + sentence.countVowels());
+        }
     }
 
     public static String reverseSentencesInText(String text) {

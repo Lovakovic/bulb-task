@@ -1,7 +1,9 @@
 package model;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Sentence {
@@ -27,6 +29,19 @@ public class Sentence {
         if(endingCharacter != 0) {
             this.endingCharacter = endingCharacter;
         }
+    }
+
+    public Map<Character, Long> countVowels() {
+        char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+        String sentence = this.toString();
+
+        Map<Character, Long> vowelCount = new HashMap<>();
+        for(char vowel : vowels) {
+            Long count = sentence.chars().filter(c -> c == vowel).count();
+            vowelCount.put(vowel, count);
+        }
+
+        return vowelCount;
     }
 
     public void capitalizeFirstLetter() {
