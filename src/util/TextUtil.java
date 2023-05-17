@@ -104,13 +104,16 @@ public class TextUtil {
         return textVowelCount;
     }
 
-    public static void countVowelsInEachSentence(String text) {
+    public static String countVowelsInEachSentence(String text) {
         List<Sentence> sentences = parseTextToSentences(text);
+        StringBuilder stringBuilder = new StringBuilder();
         int count = 0;
 
         for(Sentence sentence : sentences) {
-            System.out.println("Broj samoglasnika u "  + ++count + ". rečenici: " + sentence.countVowels());
+            stringBuilder.append("Broj samoglasnika u " + ++count + ". rečenici: " + sentence.countVowels() + ". ");
         }
+
+        return stringBuilder.toString();
     }
 
     public static String reverseSentencesInText(String text) {
